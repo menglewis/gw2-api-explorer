@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>GW2 API Explorer</title>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link href="apiexplorer.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+            <div class="row">
+              <div class="span1">
+                <img src="gw2_white.png">
+              </div>
+              <div class="span2">
+              <a class="brand" href="#">API Explorer</a>
+                </div>
+                <div class="span2">
+                <ul class="nav">
+                  <li class="active"><a href="#">Home</a></li>
+                  <li><a href="#">Github</a></li>
+                </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container content">
+        <form class="form-inline">
+            <select name="api_version" id="api_version">
+                <option selected="selected" value="v1">v1</option>
+            </select>
+            <select name="api_type" id="api_type">
+                <option selected="selected" value="world_names">World Names</option>
+                <option value="map_names">Map Names</option>
+                <option value="events">Event State</option>
+                <option value="event_names">Event Names</option>
+                <option value="wvw/matches">Matches</option>
+                <option value="wvw/match_details">Match Details</option>
+                <option value="wvw/objective_names">Objective Names</option>
+                <option value="items">Items</option>
+                <option value="item_details">Item Details</option>
+                <option value="recipes">Recipes</option>
+                <option value="recipe_details">Recipe Details</option>
+            </select>
+            <select name="lang" id="lang">
+                <option selected="selected" value="en">English</option>
+                <option value="es">Espa&ntilde;ol</option>
+                <option value="fr">Fran&ccedil;ais</option>
+                <option value="de">Deutsch</option>
+            </select>
+
+            <input type="text" id="world_id" placeholder="World ID" />
+            <input type="text" id="map_id" placeholder="Map ID" />
+            <input type="text" id="event_id" placeholder="Event ID"/>
+            <input type="text" id="match_id" placeholder="Match ID"/>
+            <input type="text" id="item_id" placeholder="Item ID"/>
+            <button id="api_submit" type="button" class="btn">Submit</button>
+        </form>
+
+        <div id="result"></div>
+    </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="apiexplorer.js" type="text/javascript"></script>
+</body>
+
+</html>
