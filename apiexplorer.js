@@ -46,6 +46,22 @@ $(function() {
             }
         }
 
+        var args = "";
+        var url;
+        for (i in data) {
+            console.log(i + ": " + data[i]);
+            args += "&" + i + "=" + data[i];
+        }
+        if (args.charAt(0) == "&") {
+            args = args.slice(1);
+        }
+
+        if (args != null) {
+            url = api_url + "?" + args;
+        }
+
+        $("#url").html("<pre>" + url + "</pre>");
+
         $.ajax({
             url: api_url,
             type: 'GET',
