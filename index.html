@@ -3,72 +3,82 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
     <title>GW2 API Explorer</title>
-    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
-    <link href="apiexplorer.css" rel="stylesheet">
-
-
+    <link href="static/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/css/apiexplorer.css" rel="stylesheet">
 </head>
 
-<body>
+<body ng-app="GW2Explorer">
 
-    <div class="navbar navbar-inverse navbar-static-top">
-      <div class="navbar-inner">
-        <div class="container">
+    <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+      <div class="container">
 
-            <a class="brand" href="#"><img src="gw2_white.png"> API Explorer</a>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><img src="static/img/gw2_white.png"> API Explorer</a>
 
-            <ul class="nav">
-              <li><a href="https://github.com/menglewis/gw2-api-explorer">Github</a></li>
-              <li><a href="http://wiki.guildwars2.com/wiki/API">API Docs</a></li>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="https://github.com/menglewis/gw2-api-explorer">Github</a></li>
+                <li><a href="http://wiki.guildwars2.com/wiki/API">API Docs</a></li>
             </ul>
-
         </div>
       </div>
     </div>
 
-    <div class="container content">
-        <form class="form-inline">
-            <select name="api_version" id="api_version">
-                <option selected="selected" value="v1">v1</option>
-            </select>
-            <select name="api_type" id="api_type">
-                <option selected="selected" value="world_names">World Names</option>
-                <option value="map_names">Map Names</option>
-                <option value="events">Event State</option>
-                <option value="event_names">Event Names</option>
-                <option value="wvw/matches">Matches</option>
-                <option value="wvw/match_details">Match Details</option>
-                <option value="wvw/objective_names">Objective Names</option>
-                <option value="items">Items</option>
-                <option value="item_details">Item Details</option>
-                <option value="recipes">Recipes</option>
-                <option value="recipe_details">Recipe Details</option>
-            </select>
-            <select name="lang" id="lang">
+    <div class="container content" ng-app="GW2Explorer" ng-controller="apiController">
+        <select class="form-control" ng-model="selectedResource" ng-options="resource.name for resource in resources">
+
+        </select>
+        <div ng-show="displayWorld()">
+            <label>World ID</label>
+            <input ng-model="world" class="form-control" type="text" />
+        </div>
+        <div ng-show="displayMap()">
+            <label>Map ID</label>
+            <input ng-model="map" class="form-control" type="text" />
+        </div>
+        <div ng-show="displayEvent()">
+            <label>Event ID</label>
+            <input ng-model="event" class="form-control" type="text" />
+        </div>
+        <div ng-show="displayMatch()">
+            <label>Match ID</label>
+            <input ng-model="match" class="form-control" type="text" />
+        </div>
+        <div ng-show="displayItem()">
+            <label>Item ID</label>
+            <input ng-model="item" class="form-control" type="text" />
+        </div>
+        <div ng-show="displayLang()">
+            <label>Language</label>
+            <select ng-model="language" class="form-control">
                 <option selected="selected" value="en">English</option>
                 <option value="es">Espa&ntilde;ol</option>
                 <option value="fr">Fran&ccedil;ais</option>
                 <option value="de">Deutsch</option>
             </select>
+        </div>
+        <button class="btn btn-primary" ng-click="submitAPIRequest()">Submit</button>
 
-            <input type="text" id="world_id" placeholder="World ID" />
-            <input type="text" id="map_id" placeholder="Map ID" />
-            <input type="text" id="event_id" placeholder="Event ID"/>
-            <input type="text" id="match_id" placeholder="Match ID"/>
-            <input type="text" id="item_id" placeholder="Item ID"/>
-            <button id="api_submit" type="button" class="btn">Submit</button>
-        </form>
 
-        <div id="url"></div>
+        <div id="url" ng-show="APIurl"><pre>{{APIurl}}</pre></div>
 
-        <div id="result"></div>
+        <div id="result" ng-show="results"><pre>{{results}}</pre></div>
     </div>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="apiexplorer.js" type="text/javascript"></script>
+    <script src="static/lib/jquery/dist/jquery.min.js"></script>
+    <script src="static/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="static/lib/angular/angular.min.js"></script>
+    <script src="static/js/app.js"></script>
+    <script src="static/js/controllers.js"></script>
+    <script src="static/js/services.js"></script>
 </body>
 
 </html>
